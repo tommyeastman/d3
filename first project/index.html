@@ -39,7 +39,10 @@
         .attr('y', (data) => (height - data) )
         .attr('width', rectWidth)
         .attr('height', (data) => data)
-        .attr('fill', 'blue')
+        .attr('fill', function(data){
+            if (data > 200) { return 'red' }
+            return 'blue';
+        })
         .attr('stroke', '#fff');
 
 </script>
