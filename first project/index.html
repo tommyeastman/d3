@@ -21,32 +21,25 @@
 </head>
 
 <body>
-    <svg>
-        <!--rect elements are rectangles-->
-        <rect />
-        <rect />
-        <rect />
-        <rect />
-        <rect />
-    </svg>
+    <svg></svg>
 </body>
 
 <script>
-    var dataset = [100, 120, 200, 240, 220];
+    var dataset = [100, 120, 200, 240, 220,300];
     var rectWidth = 100;
-    var height = 300;
-    //query the DOM for all of the rect elements. returns array of rect elements.
-    d3.selectAll('rect')
-        //bind the data to the rect elements, one-to-one. provides a _data_ attribute for each value in array
+    var height = 400;
+
+    var svg = d3.select('svg');
+    //select all rect children of svg. initially empty
+    svg.selectAll('rect')
         .data(dataset)
-        //the following methods are applied ot each element of the array
-        //everything counts from the top left corner
+        //add a rect element for each element in the data
+        .enter().append('rect')
         .attr('x', (data, index) => index * rectWidth)
         .attr('y', (data) => (height - data) )
         .attr('width', rectWidth)
         .attr('height', (data) => data)
         .attr('fill', 'blue')
-        //white border
         .attr('stroke', '#fff');
 
 </script>
