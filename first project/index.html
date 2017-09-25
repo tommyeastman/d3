@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style>
+    body {
+        margin: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    svg {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <svg>
+        <!--rect elements are rectangles-->
+        <rect />
+        <rect />
+        <rect />
+        <rect />
+        <rect />
+    </svg>
+</body>
+
+<script>
+    var dataset = [100, 120, 200, 240, 220];
+    var rectWidth = 100;
+    var height = 300;
+    //console.log(
+    d3.selectAll('rect')//query the DOM for all of the rect elements. returns array of rect elements.
+        .data(dataset)//bind the data to the rect elements, one-to-one. provides a _data_ attribute for each value in array.
+        //x and y count from the top left corner
+        .attr('x', (data, index) => index * rectWidth)
+        .attr('y', (data) => (height - data) )
+        .attr('width', rectWidth)
+        .attr('height', (data) => data)
+        .attr('fill', 'blue')
+        .attr('stroke', '#fff');
+
+//);
+
+</script>
+
+</html>
