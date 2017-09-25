@@ -25,26 +25,41 @@
 </body>
 
 <script>
-    var dataset = [100, 120, 200, 240, 220,300];
-    var rectWidth = 100;
+    var dataset = [0, 120, 200, 240, 220,2000];
+    var rectWidth = 150;
     var height = 400;
 
+    var yAxisScale = d3.scaleLinear()
+        .domain([ 0 , d3.max(dataset) ]) 
+        .range([ height, 0 ]);
+
+    var yScale = d3.scaleLinear()
+        .domain([ 0 , d3.max(dataset) ]) 
+        .range([ 0, height ]);
+
+    var yAxis = d3.axisLeft()
+      	.scale(yAxisScale);
+
+    d3.select('svg')
+        .append('g')
+        .attr('transform','translate (40, 20)')
+        .call(yAxis)
+    
     var svg = d3.select('svg');
-    //select all rect children of svg. initially empty
     svg.selectAll('rect')
         .data(dataset)
-        //add a rect element for each element in the data
         .enter().append('rect')
         .attr('x', (data, index) => index * rectWidth)
-        .attr('y', (data) => (height - data) )
+        .attr('y', (data) => height - yScale(data))
         .attr('width', rectWidth)
-        .attr('height', (data) => data)
+        .attr('height', (data) => yScale(data))
         .attr('fill', function(data){
             if (data > 200) { return 'red' }
             return 'blue';
         })
-        .attr('stroke', '#fff');
-
+        .attr('stroke', '#fff')
+        .attr('transform','translate (40, 20)')
+        
 </script>
 
 </html>
